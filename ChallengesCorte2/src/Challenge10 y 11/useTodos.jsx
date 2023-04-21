@@ -2,6 +2,8 @@ import { useEffect, useReducer } from 'react';
 import * as types from '../components/types';
 import { TodoReducer } from './TodoReducer';
 
+
+
 const initialState = []
 
 const init = () =>{
@@ -23,10 +25,18 @@ export const useTodos = () =>{
         dispatch(action)
     }
 
-    const substractTodo = (todo) =>{
+    const substractTodo = (id) =>{
         const action = {
             type: types.DELETE_TODO,
-            payload: todo
+            payload: id
+        }
+        dispatch(action)
+    }
+
+    const toggleTodo = (id) =>{
+        const action = {
+            type: types.TOGGLE_TODO,
+            payload: id
         }
         dispatch(action)
     }
@@ -34,6 +44,7 @@ export const useTodos = () =>{
     return {
         handleNewTodo,
         substractTodo,
-        todo
+        toggleTodo,
+        todos
     }
 }

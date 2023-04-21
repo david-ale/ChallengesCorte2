@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 export const TodoAdd = ({onNewTodo}) => {
     const onFormSubmit = (event) =>{
         event.preventDefault ()
@@ -8,7 +10,9 @@ export const TodoAdd = ({onNewTodo}) => {
             done: false
         }
 
-        onNewTodo(newTodo)
+        onNewTodo(newTodo);
+        
+    
     }
 
     return (
