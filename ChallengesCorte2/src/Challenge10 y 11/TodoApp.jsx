@@ -1,15 +1,15 @@
-import { useTodos } from "./useTodos";
 import { TodoAdd } from "./TodoAdd";
 import { TodoList } from "./TodoList";
-import { TodoItem } from "./TodoItem";
 import { useReducer } from "react";
 import { TodoReducer } from "./TodoReducer";
+import * as types from '../components/types'
 
 const initialState = [
     {
         id:  new Date().getTime(),
         description: 'Hacer los challenges',
-        done: false
+        done: false,
+        changes: 0
 
     }
 ]
@@ -18,11 +18,30 @@ export const TodoApp = () =>{
     const [todos, dispatch] = useReducer(TodoReducer,initialState);
 
     const handleNewTodo = (todo) => {
+        
         const action = {
-            type: '[TODO] ADD TODO',
+            type: types.CREATE_TODO,
             payload: todo
         }
         dispatch(action)
+        
+    }
+
+    const substracTodo = (todo) =>{
+        const action = {
+            type: types.DELETE_TODO,
+            payload: todo
+        }
+        dispatch (action)
+
+    }
+
+    const toggleTodo = (todo) =>{
+        const action = {
+            type: types.TOGGLE_TODO,
+            payload: todo
+        }
+        dispatch (action)
     }
 
     return (
@@ -31,12 +50,13 @@ export const TodoApp = () =>{
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos}/>
+                    <TodoList todos={todos} onDeleteTodo={substracTodo} onToggleTodo={toggleTodo}/>
                 </div>
 
                 <div className="col-5">
                     <TodoAdd onNewTodo={handleNewTodo}/>
                 </div>
+                
             </div>
         </>
     )
