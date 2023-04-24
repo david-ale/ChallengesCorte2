@@ -1,6 +1,5 @@
-import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
-
+import {useContext} from 'react'
+import {useNavigate} from 'react-router-dom'
 export const LoginPage = () =>{
     const { user, setUser } = useContext(UserContext)
     const navigate = useNavigate()
