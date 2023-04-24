@@ -50,11 +50,15 @@ export const TodoApp = () =>{
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} />
+                    <TodoList todos={todos} 
+                            onDeleteTodo={substracTodo}
+                            onToggleTodo={toggleTodo}
+                    />
                 </div>
 
                 <div className="col-5">
-                    <TodoAdd onNewTodo={handleNewTodo}/>
+                    <TodoAdd onNewTodo={handleNewTodo}  
+                    />
                 </div>
                 
             </div>
