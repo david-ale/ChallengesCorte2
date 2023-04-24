@@ -1,5 +1,5 @@
 import { LoginPage } from "./LoginPage"
-import { UserRoutes } from "./UserRoutes"
+import { UserRoutes } from "./UserRoutes.jsx"
 import { PrivateRoutes } from "./PrivateRoutes"
 import { Route, Routes } from "react-router-dom"
 

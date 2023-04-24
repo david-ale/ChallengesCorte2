@@ -1,20 +1,10 @@
-export const TodoReducer = (initialState = [], action) =>{
+export const TodoReducer = (initialState = [], action) => {
     switch (action.type){
-        case '[TODO] ADD TODO':
-            console.log(initialState)
-            return [...initialState,action.payload]  
-        case '[TODO] DELETE TODO':
-            return initialState.filter(item =>item !== action.payload)
-        case '[TODO] TOGGLE TODO':
-            const todo = initialState.find(item => item.id === action.payload.id)
-            if(todo.changes === 1){
-                todo.done = !todo.done
-                todo.changes = 0
-            }else{
-                todo.changes += 1
-            }
-            console.log(initialState)
-            return initialState
+        case 'ABC':
+            throw new Error('action not yet implemented')
+            break;
+        case '[TODO] ADD todo':
+            return [...initialState, action.payload]
         default:
             return initialState;
     }

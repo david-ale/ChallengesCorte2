@@ -51,8 +51,8 @@ export const TodoApp = () =>{
             <div className="row">
                 <div className="col-7">
                     <TodoList todos={todos} 
-                            onDeleteTodo={substracTodo}
-                            onToggleTodo={toggleTodo}
+                         onDeleteTodo={substracTodo}
+                         onToggleTodo={toggleTodo}
                     />
                 </div>
 

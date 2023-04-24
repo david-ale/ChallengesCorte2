@@ -1,50 +1,52 @@
-import { useEffect, useReducer } from 'react';
-import * as types from '../components/types';
-import { TodoReducer } from './TodoReducer';
+import { useEffect, useState } from 'react';
 
-
-
-const initialState = []
-
-const init = () =>{
-    return JSON.parse(localStorage.getItem('todos')) || []
-}
-
-export const useTodos = () =>{
-    const [todos,dispatch] = useReducer(TodoReducer,initialState,init);
-
-    useEffect (() => {
-        localStorage.setItem('todos',JSON.stringify(todos))
-    },[todos])
-
-    const handleNewTodo = (todo) =>{
-        const action = {
-            type: types.CREATE_TODO,
-            payload: todo
-        }
-        dispatch(action)
-    }
-
-    const substractTodo = (id) =>{
-        const action = {
-            type: types.DELETE_TODO,
-            payload: id
-        }
-        dispatch(action)
-    }
-
-    const toggleTodo = (id) =>{
-        const action = {
-            type: types.TOGGLE_TODO,
-            payload: id
-        }
-        dispatch(action)
-    }
-
+export const useTodos = () => {
+    const [todos, setTodos] = useState([]);
+  
+    useEffect(() => {
+      const storedTodos = JSON.parse(localStorage.getItem("todos"));
+      if (storedTodos) setTodos(storedTodos);
+    }, []);
+  
+    useEffect(() => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
+  
+    const newTodo = (description) => {
+      const newestTodo = {
+        id: new Date().getTime(),
+        description: description,
+        done: false,
+      };
+      setTodos([...todos, newestTodo]);
+    };
+  
+    const deleteTodo = (id) => {
+      const updatedTodos = todos.filter((todo) => todo.id !== id);
+      setTodos(updatedTodos);
+    };
+  
+    const toggleTodo = (id) => {
+      const updatedTodos = todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      );
+      setTodos(updatedTodos);
+    };
+  
+    const countTodos = () => {
+      return todos.length;
+    };
+  
+    const countTodosP = () => {
+      return todos.filter((todo) => !todo.done).length;
+    };
+  
     return {
-        handleNewTodo,
-        substractTodo,
-        toggleTodo,
-        todos
-    }
-}
+      todos,
+      newTodo,
+      deleteTodo,
+      toggleTodo,
+      countTodos,
+      countTodosP,
+    };
+  };
