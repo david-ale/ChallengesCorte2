@@ -6,7 +6,7 @@ export const TodoList = ({todos = [],onDeleteTodo, onToggleTodo}) => {
             {
                 todos.map((todo,key)=>{
                     return (
-                        <TodoItem key={key} todo = {todo} onDeleteTodo={onDeleteTodo} onToggleTodo = {onToggleTodo} />
+                        <TodoItem key={key} todo = {todo} />
                     )
                 })
             }
